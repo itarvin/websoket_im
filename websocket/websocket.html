@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>websocket应用</title>
+</head>
+<body>
+
+
+<script>
+
+    //浏览器实现一个可以给开发者用的应用都表现为一个js的对象
+    //websocket就是一个js对象（WebSocket（只有一个url地址参数））
+    //websocket特点：创建一个websocket应用是立刻就会向服务器发送请求；（握手过程，建立 websocket连接）
+
+    var socket = new WebSocket('ws://127.0.0.1:2347');
+    console.log(socket.readyState);
+    //websocket连接就绪
+    //发送消息的方法  send(消息)  消息：必须是字符串， {a:1,b:3},[1,2,3,4,4]非字符串必须序列化或者说转成字符串。
+    socket.onopen = function(){
+        socket.send(JSON.stringify({a:1,b:3}));
+        console.log(socket.readyState);
+    };
+    socket.onmessage = function(event){
+        console.log(socket.readyState);
+      alert(event.data);
+    };
+
+    socket.onclose = function(wasClean,code,reason){
+        console.log(socket.readyState);
+        console.log(wasClean,code,reason);
+    };
+
+
+
+
+
+
+</script>
+</body>
+</html>
